@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewData["Title"] = "Category";
+}
+
+<h2>Category</h2>
+
+<table class="table">
+
+    <tr>
+        <th>Name</th>
+    </tr>
+
+    @foreach (var cheese in Model)
+    {
+        <tr>
+            <td>@cheese.Category</td>
+        </tr>
+    }
+</table>
+
