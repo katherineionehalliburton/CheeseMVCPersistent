@@ -9,11 +9,13 @@
 
     <tr>
         <th>Name</th>
+        <th>Category</th>
     </tr>
 
     @foreach (var cheese in Model)
     {
         <tr>
+            <td>@cheese.Name</td>
             <td>@cheese.Category</td>
         </tr>
     }
