@@ -11,7 +11,7 @@ namespace CheeseMVC.Data
 
         public DbSet<Menu> Menu { get; set; }
 
-        public DbSet<CheeseMenu> CheeseMenu { get; set; }
+        public DbSet<CheeseMenu> CheeseMenus { get; set; }
 
         public CheeseDbContext(DbContextOptions<CheeseDbContext> options) 
             : base(options)

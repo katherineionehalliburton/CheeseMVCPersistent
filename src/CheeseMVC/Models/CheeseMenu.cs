@@ -7,7 +7,7 @@ namespace CheeseMVC.Models
 {
     public class CheeseMenu
     {
-        IList<CheeseMenu> CheeseMenus;
+        public IList<CheeseMenu> CheeseMenus { get; set; }
             
         public int MenuID { get; set; }
         public Menu Menu { get; set; }
