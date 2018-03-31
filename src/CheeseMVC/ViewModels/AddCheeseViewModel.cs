@@ -28,13 +28,16 @@ namespace CheeseMVC.ViewModels
 
             CheeseCategory = new List<SelectListItem>();
 
-            // <option value="0">Hard</option>
-            CheeseCategory.Add(new SelectListItem
-            {
-                Value = ((int)CategoryID).ToString(),
-                Text = Name.ToString()
-            });
+            foreach (CheeseCategory item in categories)
 
+            {
+                CheeseCategory.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.Name
+                });
+
+            }
         }
 
         public AddCheeseViewModel()
