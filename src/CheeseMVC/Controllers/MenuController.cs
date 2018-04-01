@@ -117,25 +117,5 @@ namespace CheeseMVC.Controllers
             return View(addMenuItemViewModel);
         }
 
-        public IActionResult Remove()
-        {
-            ViewBag.title = "Remove Menu";
-            ViewBag.menu = context.Menus.ToList();
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Remove(int[] menuIds)
-        {
-            foreach (int id in menuIds)
-            {
-                Menu amenu = context.Menus.Single(m => m.ID == id);
-                context.Menus.Remove(amenu);
-            }
-
-            context.SaveChanges();
-
-            return Redirect("/");
-        }
     }
 }
