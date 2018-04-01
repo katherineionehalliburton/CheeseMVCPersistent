@@ -1,7 +1,11 @@
-﻿
-@model IEnumerable<CheeseMVC.Models.Menu>
+﻿@model IEnumerable<CheeseMVC.Models.Menu>
 
-<h2>Menus</h2>
+
+@{
+    ViewBag.Title = "Cheese Menus";
+}
+
+<h2>@ViewBag.Title</h2>
 
 <ul>
 
@@ -12,6 +16,7 @@
 
     }
 
-    <p><a asp-controller="Menu" asp-action="Add">Add</a></p>
-
 </ul>
+
+<p><a asp-controller="Menu" asp-action="Add">Add Menu</a> |
+<a asp-controller="Menu" asp-action="Remove">Delete Menu</a></p>

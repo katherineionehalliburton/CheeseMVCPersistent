@@ -8,7 +8,7 @@ namespace CheeseMVC.ViewModels
 {
     public class ViewMenuViewModel
     {
-        public Menu Menu { get; set; }
+        public Menu Menus { get; set; }
         public IList<CheeseMenu> Items { get; set; }
     }
 }

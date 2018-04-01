@@ -11,9 +11,10 @@ using System;
 namespace CheeseMVC.Migrations
 {
     [DbContext(typeof(CheeseDbContext))]
-    partial class CheeseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180331200935_stepThree")]
+    partial class stepThree
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,7 +79,7 @@ namespace CheeseMVC.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Menus");
+                    b.ToTable("Menu");
                 });
 
             modelBuilder.Entity("CheeseMVC.Models.Cheese", b =>
@@ -96,7 +97,7 @@ namespace CheeseMVC.Migrations
                         .HasForeignKey("CheeseID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("CheeseMVC.Models.Menu", "Menus")
+                    b.HasOne("CheeseMVC.Models.Menu", "Menu")
                         .WithMany("CheeseMenus")
                         .HasForeignKey("MenuID")
                         .OnDelete(DeleteBehavior.Cascade);

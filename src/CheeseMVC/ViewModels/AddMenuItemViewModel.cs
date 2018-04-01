@@ -12,7 +12,7 @@ namespace CheeseMVC.ViewModels
         public int CheeseID { get; set; }
         public int MenuID { get; set; }
 
-        public Menu Menu { get; set; }
+        public Menu Menus { get; set; }
         public List<SelectListItem> Cheeses { get; set; }
 
         
@@ -21,7 +21,7 @@ namespace CheeseMVC.ViewModels
 
         }
 
-        public AddMenuItemViewModel(Menu menu, IEnumerable<Cheese> cheeses)
+        public AddMenuItemViewModel(Menu menus, IEnumerable<Cheese> cheeses)
         {
             Cheeses = new List<SelectListItem>();
 
@@ -33,7 +33,7 @@ namespace CheeseMVC.ViewModels
                     Text = x.Name
                 });
             }
-            Menu = menu;
+            Menus = menus;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace CheeseMVC.Controllers
 {
     public class MenuController : Controller
     {
-        private CheeseDbContext context;
+        private readonly CheeseDbContext context;
 
         public MenuController(CheeseDbContext dbContext)
         {
@@ -22,9 +22,9 @@ namespace CheeseMVC.Controllers
 
         public IActionResult Index()
         {
-            var Menus = context.Menu.ToList();
+            var Menus = context.Menus.ToList();
 
-            return View("/Index");
+            return View(Menus);
         }
 
        
@@ -45,7 +45,7 @@ namespace CheeseMVC.Controllers
                     Name = addMenuViewModel.Name
                 };
 
-                context.Menu.Add(newMenu);
+                context.Menus.Add(newMenu);
                 context.SaveChanges();
 
                 return Redirect("/Menu/ViewMenu/" + newMenu.ID);
@@ -58,7 +58,7 @@ namespace CheeseMVC.Controllers
         {
             try
             {
-                Menu menu = context.Menu.Single(m => m.ID == id);
+                Menu menus = context.Menus.Single(m => m.ID == id);
 
                 List<CheeseMenu> items = context
                     .CheeseMenus
@@ -68,7 +68,7 @@ namespace CheeseMVC.Controllers
 
                 ViewMenuViewModel viewMenuViewModel = new ViewMenuViewModel
                 {
-                    Menu = menu,
+                    Menus = menus,
                     Items = items
                 };
 
@@ -82,11 +82,11 @@ namespace CheeseMVC.Controllers
 
         public IActionResult AddItem(int id)
         {
-            Menu menu = context.Menu.Single(m => m.ID == id);
+            Menu menus = context.Menus.Single(m => m.ID == id);
 
-            List<Cheese> cheese = context.Cheeses.ToList();
+            List<Cheese> cheeses = context.Cheeses.ToList();
 
-            return View(new AddMenuItemViewModel(menu, cheese));
+            return View(new AddMenuItemViewModel(menus, cheeses));
         }
 
         [HttpPost]
@@ -106,7 +106,7 @@ namespace CheeseMVC.Controllers
                     CheeseMenu cheeseMenu = new CheeseMenu
                     {
                         Cheese = context.Cheeses.Single(c => c.ID == cheeseID),
-                        Menu = context.Menu.Single(m => m.ID == menuID)
+                        Menus = context.Menus.Single(m => m.ID == menuID)
                     };
 
                     context.CheeseMenus.Add(cheeseMenu);
@@ -115,6 +115,27 @@ namespace CheeseMVC.Controllers
                 return Redirect(string.Format("/Menu/ViewMenu/{0}", addMenuItemViewModel.MenuID));
             }
             return View(addMenuItemViewModel);
+        }
+
+        public IActionResult Remove()
+        {
+            ViewBag.title = "Remove Menu";
+            ViewBag.menu = context.Menus.ToList();
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Remove(int[] menuIds)
+        {
+            foreach (int id in menuIds)
+            {
+                Menu amenu = context.Menus.Single(m => m.ID == id);
+                context.Menus.Remove(amenu);
+            }
+
+            context.SaveChanges();
+
+            return Redirect("/");
         }
     }
 }
